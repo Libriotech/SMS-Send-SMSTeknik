@@ -3,6 +3,7 @@ package SMS::Send::SMSTeknik;
 # use HTTP::Tiny;
 use LWP::UserAgent;
 use Modern::Perl;
+use Data::Dumper;
 use base 'SMS::Send::Driver';
 
 our $VERSION = '0.01';
@@ -32,6 +33,7 @@ sub new {
         _id     => "$arg_arr[5]",
         _sender => "$arg_arr[7]",
     };
+    say Dumper $args;
 
     # FIXME Make this configurable
     my $protocol = "https";
@@ -55,6 +57,7 @@ sub send_sms {
         to      => "$args{'to'}",
         sender  => "$self->{_sender}"
     };
+    say Dumper $xml_args;
     my $sms_xml = _build_sms_xml($xml_args);
     say $sms_xml;
 
@@ -104,6 +107,7 @@ sub send_sms {
 sub _build_sms_xml {
 
     my ( $args ) = @_;
+    say Dumper $args;
 
     # FIXME Use DateTime for this...
     my ($sec,$min,$hour,$mday,$mon,$year) = localtime time;
