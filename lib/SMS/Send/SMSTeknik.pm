@@ -56,6 +56,7 @@ sub send_sms {
         sender  => "$self->{_sender}"
     };
     my $sms_xml = _build_sms_xml($xml_args);
+    say $sms_xml;
 
     my $ua = new LWP::UserAgent;
     $ua->agent("Koha/0.1 " . $ua->agent);
@@ -67,7 +68,7 @@ sub send_sms {
     # Pass request to the user agent and get a response back
     my $res = $ua->request($req);
 
-    print $res->as_string;
+    say $res->as_string;
 
      # Check the outcome of the response
     if ($res->is_success) {
