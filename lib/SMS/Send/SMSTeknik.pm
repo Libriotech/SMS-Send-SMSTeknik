@@ -7,14 +7,30 @@ use base 'SMS::Send::Driver';
 
 our $VERSION = '0.01';
 
+=pod
+
+=head2 new()
+
+C4::SMS calls new() like so:
+
+        $sender = SMS::Send->new(
+            $driver,
+            _login    => C4::Context->preference('SMSSendUsername'),
+            _password => C4::Context->preference('SMSSendPassword'),
+            %args,
+        );
+
+%args comes from the YAML config file.
+
+=cut
+
 sub new {
     my ($class, @arg_arr) = @_;
     my $args = {
-        _login => "$arg_arr[1]",
-        _pass  => "$arg_arr[3]",
-        _id    => "$arg_arr[5]",
-        _user  => "$arg_arr[7]",
-        _pass  => "$arg_arr[9]",
+        _user   => "$arg_arr[1]",
+        _pass   => "$arg_arr[3]",
+        _id     => "$arg_arr[5]",
+        _sender => "$arg_arr[7]",
     };
 
     # FIXME Make this configurable
@@ -23,11 +39,11 @@ sub new {
     my $postURL = "/send/";
     my $postHOST = "api.smsteknik.se";
 
-    die "$class needs hash_ref with _login and _password.\n" unless $args->{_login} && $args->{_password};
+    die "$class needs hash_ref with _login and _password.\n" unless $args->{_login} && $args->{_pass};
     my $self = bless {%$args}, $class;
     $self->{send_url} = $protocol . "://" . $postHOST . $postURL . $service  . "?id=" . $args->{_id} . "&user=" . $args->{_user} . "&pass=" . $args->{_pass};
     # $self->{status_url} = 'http://sms-pro.net/services/' . $args->{_login} . '/status';
-    # $self->{sms_sender} = 'FROM SENDER'; #Add the text that describes who sent the sms
+    $self->{_sender} = $args->{_sender};
     return $self;
 }
 
