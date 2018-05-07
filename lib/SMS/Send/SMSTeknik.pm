@@ -35,9 +35,9 @@ sub send_sms {
 
     my ($self, %args) = @_;
     my $xml_args = {
-        message         => "$args{'text'}",
-        number          => "$args{'to'}",
-        sender          => "$self->{_sender}"
+        message => "$args{'text'}",
+        to      => "$args{'to'}",
+        sender  => "$self->{_sender}"
     };
     my $sms_xml = _build_sms_xml($xml_args);
 
@@ -103,7 +103,7 @@ sub _build_sms_xml {
     $xmltemp .=     "       <send_time>$sendtime</send_time>";
     $xmltemp .=     "       <udh></udh>";
     $xmltemp .=     "       <udmessage>" . $args->{'message'} . "</udmessage>";
-    $xmltemp .=     "       <smssender>" . $args->{'$sender'} . "</smssender>";
+    $xmltemp .=     "       <smssender>" . $args->{'sender'} . "</smssender>";
     $xmltemp .=     "       <deliverystatustype>0</deliverystatustype>";
     $xmltemp .=     "       <deliverystatusaddress></deliverystatusaddress> ";
     $xmltemp .=     "       <usereplynumber>0</usereplynumber>";
@@ -113,7 +113,7 @@ sub _build_sms_xml {
     $xmltemp .=     "       <usee164>0</usee164>";
     $xmltemp .=     "       <items>";
     $xmltemp .=     "               <recipient>";
-    $xmltemp .=     "                       <orgaddress>" . $number . "</orgaddress>";
+    $xmltemp .=     "                       <orgaddress>" . $args->{'to'} . "</orgaddress>";
     $xmltemp .=     "               </recipient>";
     $xmltemp .=     "       </items>";
     $xmltemp .=     "</sms-teknik>";
