@@ -1,0 +1,5 @@
+=head1 NAME
+
+SMS::Send::SMSTeknik - SMS::Send driver to send messages via Telenor SMS Pro
+
+=cut
