@@ -105,9 +105,10 @@ sub _build_sms_xml {
 
     my ( $args ) = @_;
 
+    # FIXME Use DateTime for this...
     my ($sec,$min,$hour,$mday,$mon,$year) = localtime time;
-    my $sendtime = addZero($hour) . ":" . addZero($min) . ":" . addZero($sec);
-    my $senddate = 1900+$year . "-" . addZero($mon+1) . "-" . addZero($mday);
+    my $sendtime = _addZero($hour) . ":" . _addZero($min) . ":" . _addZero($sec);
+    my $senddate = 1900+$year . "-" . _addZero($mon+1) . "-" . _addZero($mday);
 
     my $xmltemp = "<?xml version='1.0' ?>";
     $xmltemp .= "<sms-teknik>";
@@ -135,6 +136,12 @@ sub _build_sms_xml {
     $xmltemp .=     "</sms-teknik>";
 
     return $xmltemp;
+}
+
+sub _addZero{
+    my ($value) = @_;
+    if($value < 10){ $value = "0" . $value; }
+    return $value;
 }
 
 #sub _build_status_xml {
