@@ -59,7 +59,6 @@ sub send_sms {
 
     my $ua = new LWP::UserAgent;
     $ua->agent("Koha/0.1 " . $ua->agent);
-    print $ua->protocols_forbidden .  "\n";
 
     my $req = new HTTP::Request GET => $self->{send_url};
     $req->content_type('application/x-www-form-urlencoded');
