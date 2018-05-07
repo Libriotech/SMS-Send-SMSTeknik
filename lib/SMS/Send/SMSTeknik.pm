@@ -39,7 +39,7 @@ sub new {
     my $postURL = "/send/";
     my $postHOST = "api.smsteknik.se";
 
-    die "$class needs hash_ref with _login and _password.\n" unless $args->{_login} && $args->{_pass};
+    die "$class needs hash_ref with _user and _pass and and _id and _sender.\n" unless $args->{_user} && $args->{_pass} && $args->{_id} && $args->{_sender};
     my $self = bless {%$args}, $class;
     $self->{send_url} = $protocol . "://" . $postHOST . $postURL . $service  . "?id=" . $args->{_id} . "&user=" . $args->{_user} . "&pass=" . $args->{_pass};
     # $self->{status_url} = 'http://sms-pro.net/services/' . $args->{_login} . '/status';
