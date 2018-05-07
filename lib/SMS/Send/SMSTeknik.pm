@@ -41,7 +41,7 @@ sub send_sms {
     };
     my $sms_xml = _build_sms_xml($xml_args);
 
-    $ua = new LWP::UserAgent;
+    my $ua = new LWP::UserAgent;
     $ua->agent("AgentName/0.1 " . $ua->agent);
     print $ua->protocols_forbidden .  "\n";
 
