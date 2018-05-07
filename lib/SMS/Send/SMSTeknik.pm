@@ -27,6 +27,7 @@ C4::SMS calls new() like so:
 
 sub new {
     my ($class, @arg_arr) = @_;
+    # FIXME Since %args is a hash, the order of the extra args is random! 
     my $args = {
         _user   => "$arg_arr[1]",
         _pass   => "$arg_arr[3]",
