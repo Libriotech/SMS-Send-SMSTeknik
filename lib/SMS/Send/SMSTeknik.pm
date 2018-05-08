@@ -27,12 +27,7 @@ C4::SMS calls new() like so:
 
 sub new {
     my ($class, @arg_arr) = @_;
-#    my $args = {
-#        _user   => "$arg_arr[1]",
-#        _pass   => "$arg_arr[3]",
-#        _id     => "$arg_arr[5]",
-#        _sender => "$arg_arr[7]",
-#    };
+    # The order of arguments in @arg_arr is random, so turn array into hash
     my %args = @arg_arr;
     say Dumper \%args;
 
@@ -82,29 +77,6 @@ sub send_sms {
     }
 }
 
-# This status subroutine is not used by SMS::Send but can be used directly with the driver.
-#sub sms_status {
-#    my ($self, $mobilectrl_id) = @_;
-#    my $args = {
-#        customer_id     => "$self->{_login}",
-#        mobilectrl_id   => "$mobilectrl_id"
-#    };
-#    my $xml = _build_status_xml($args);
-#    return _post($self->{status_url}, $xml);
-#}
-
-#sub _post {
-#    my ($url, $sms_xml) = @_;
-#    return HTTP::Tiny->new->post(
-#        $url => {
-#            content => $sms_xml,
-#            headers => {
-#                "Content-Type" => "application/xml",
-#            },
-#        },
-#    );
-#}
-
 sub _build_sms_xml {
 
     my ( $args ) = @_;
@@ -149,26 +121,6 @@ sub _addZero{
     return $value;
 }
 
-#sub _build_status_xml {
-#    my $args = shift;
-#    return '<?xml version="1.0" encoding="ISO-8859-1"?>'
-#    . '<mobilectrl_delivery_status_request>'
-#    . '<customer_id>'
-#    . $args->{customer_id}
-#    . '</customer_id>'
-#    . '<status_for type="mobilectrl_id">'
-#    . $args->{mobilectrl_id}
-#    . '</status_for>'
-#    . '</mobilectrl_delivery_status_request>';
-#}
-
-#sub _verify_response {
-#    my $content = shift;
-#    if ($content =~ /\<status\>(\d)\<\/status>/) {
-#        return $1;
-#    }
-#    return 1;
-#}
 1;
 
 =head1 NAME
