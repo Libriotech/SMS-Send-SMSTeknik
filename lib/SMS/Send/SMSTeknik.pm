@@ -34,7 +34,7 @@ sub new {
 #        _sender => "$arg_arr[7]",
 #    };
     my %args = @arg_arr;
-    say Dumper %args;
+    say Dumper \%args;
 
     # FIXME Make this configurable
     my $protocol = "https";
@@ -42,9 +42,9 @@ sub new {
     my $postURL = "/send/";
     my $postHOST = "api.smsteknik.se";
 
-    die "$class needs hash_ref with _user and _pass and and _id and _sender.\n" unless $args{_user} && $args{_pass} && $args{_id} && $args{_sender};
+    die "$class needs hash_ref with _login and _password and and _id and _sender.\n" unless $args{_login} && $args{_password} && $args{_id} && $args{_sender};
     my $self = bless {%args}, $class;
-    $self->{send_url} = $protocol . "://" . $postHOST . $postURL . $service  . "?id=" . $args{_id} . "&user=" . $args{_user} . "&pass=" . $args{_pass};
+    $self->{send_url} = $protocol . "://" . $postHOST . $postURL . $service  . "?id=" . $args{_id} . "&user=" . $args{_login} . "&pass=" . $args{_password};
     $self->{_sender} = $args{_sender};
     # $self->{status_url} = 'http://sms-pro.net/services/' . $args->{_login} . '/status';
     return $self;
