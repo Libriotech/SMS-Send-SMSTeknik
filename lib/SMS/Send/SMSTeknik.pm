@@ -7,6 +7,7 @@ use Data::Dumper;
 use base 'SMS::Send::Driver';
 
 our $VERSION = '0.01';
+our $debug = 0;
 
 =pod
 
@@ -29,7 +30,7 @@ sub new {
     my ($class, @arg_arr) = @_;
     # The order of arguments in @arg_arr is random, so turn array into hash
     my %args = @arg_arr;
-    say Dumper \%args;
+    say Dumper \%args if $debug;
 
     # FIXME Make this configurable
     my $protocol = "https";
@@ -53,9 +54,9 @@ sub send_sms {
         to      => "$args{'to'}",
         sender  => "$self->{_sender}"
     };
-    say Dumper $xml_args;
+    say Dumper $xml_args if $debug;
     my $sms_xml = _build_sms_xml($xml_args);
-    say $sms_xml;
+    say $sms_xml if $debug;
 
     my $ua = new LWP::UserAgent;
     $ua->agent("Koha/0.1 " . $ua->agent);
@@ -67,7 +68,7 @@ sub send_sms {
     # Pass request to the user agent and get a response back
     my $res = $ua->request($req);
 
-    say $res->as_string;
+    say $res->as_string if $debug;
 
      # Check the outcome of the response
     if ($res->is_success) {
