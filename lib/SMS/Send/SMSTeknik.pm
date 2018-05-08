@@ -88,7 +88,7 @@ sub _build_sms_xml {
     my $sendtime = _addZero($hour) . ":" . _addZero($min) . ":" . _addZero($sec);
     my $senddate = 1900+$year . "-" . _addZero($mon+1) . "-" . _addZero($mday);
 
-    my $xmltemp = "<?xml version='1.0' ?>";
+    my $xmltemp = "<?xml version='1.0' encoding='ISO-8859-1'?>";
     $xmltemp .= "<sms-teknik>";
     $xmltemp .=     "       <operationtype>0</operationtype>";
     $xmltemp .=     "       <flash>0</flash> ";
