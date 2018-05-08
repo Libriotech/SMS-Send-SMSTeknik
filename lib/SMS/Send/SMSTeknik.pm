@@ -27,14 +27,14 @@ C4::SMS calls new() like so:
 
 sub new {
     my ($class, @arg_arr) = @_;
-    # FIXME Since %args is a hash, the order of the extra args is random! 
-    my $args = {
-        _user   => "$arg_arr[1]",
-        _pass   => "$arg_arr[3]",
-        _id     => "$arg_arr[5]",
-        _sender => "$arg_arr[7]",
-    };
-    say Dumper $args;
+#    my $args = {
+#        _user   => "$arg_arr[1]",
+#        _pass   => "$arg_arr[3]",
+#        _id     => "$arg_arr[5]",
+#        _sender => "$arg_arr[7]",
+#    };
+    my %args = @arg_arr;
+    say Dumper %args;
 
     # FIXME Make this configurable
     my $protocol = "https";
@@ -42,11 +42,11 @@ sub new {
     my $postURL = "/send/";
     my $postHOST = "api.smsteknik.se";
 
-    die "$class needs hash_ref with _user and _pass and and _id and _sender.\n" unless $args->{_user} && $args->{_pass} && $args->{_id} && $args->{_sender};
+    die "$class needs hash_ref with _user and _pass and and _id and _sender.\n" unless $args{_user} && $args{_pass} && $args{_id} && $args{_sender};
     my $self = bless {%$args}, $class;
-    $self->{send_url} = $protocol . "://" . $postHOST . $postURL . $service  . "?id=" . $args->{_id} . "&user=" . $args->{_user} . "&pass=" . $args->{_pass};
+    $self->{send_url} = $protocol . "://" . $postHOST . $postURL . $service  . "?id=" . $args{_id} . "&user=" . $args{_user} . "&pass=" . $args{_pass};
+    $self->{_sender} = $args{_sender};
     # $self->{status_url} = 'http://sms-pro.net/services/' . $args->{_login} . '/status';
-    $self->{_sender} = $args->{_sender};
     return $self;
 }
 
