@@ -1,5 +1,5 @@
 =head1 NAME
 
-SMS::Send::SMSTeknik - SMS::Send driver to send messages via Telenor SMS Pro
+SMS::Send::SMSTeknik - SMS::Send driver to send messages via SMSTeknik.
 
 =cut
