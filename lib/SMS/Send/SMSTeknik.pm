@@ -81,7 +81,7 @@ sub send_sms {
 sub _build_sms_xml {
 
     my ( $args ) = @_;
-    say Dumper $args;
+    say Dumper $args if $debug;
 
     # FIXME Use DateTime for this...
     my ($sec,$min,$hour,$mday,$mon,$year) = localtime time;
