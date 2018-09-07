@@ -4,6 +4,7 @@ package SMS::Send::SMSTeknik;
 use LWP::UserAgent;
 use Modern::Perl;
 use Data::Dumper;
+use Encode;
 use base 'SMS::Send::Driver';
 
 our $VERSION = '0.01';
@@ -50,7 +51,7 @@ sub send_sms {
 
     my ($self, %args) = @_;
     my $xml_args = {
-        message => "$args{'text'}",
+        message => Encode::encode( "ISO-8859-1", $args{'text'} ),
         to      => "$args{'to'}",
         sender  => "$self->{_sender}"
     };
