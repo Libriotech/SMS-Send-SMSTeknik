@@ -98,7 +98,7 @@ sub _build_sms_xml {
     $xmltemp .=     "       <send_date>$senddate</send_date>";
     $xmltemp .=     "       <send_time>$sendtime</send_time>";
     $xmltemp .=     "       <udh></udh>";
-    $xmltemp .=     "       <udmessage>" . $args->{'message'} . "</udmessage>";
+    $xmltemp .=     "       <udmessage><![CDATA[" . $args->{'message'} . "]]></udmessage>";
     $xmltemp .=     "       <smssender>" . $args->{'sender'} . "</smssender>";
     $xmltemp .=     "       <deliverystatustype>0</deliverystatustype>";
     $xmltemp .=     "       <deliverystatusaddress></deliverystatusaddress> ";
