@@ -62,7 +62,7 @@ sub send_sms {
     my $ua = new LWP::UserAgent;
     $ua->agent("Koha/0.1 " . $ua->agent);
 
-    my $req = new HTTP::Request GET => $self->{send_url};
+    my $req = new HTTP::Request POST => $self->{send_url};
     $req->content_type('application/x-www-form-urlencoded');
     $req->content($sms_xml);
 
